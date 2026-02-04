@@ -1,0 +1,52 @@
+{
+  "name": "expense-tracker-api",
+  "version": "1.0.0",
+  "description": "Smart Expense Tracker API with AI-powered insights",
+  "main": "dist/index.js",
+  "scripts": {
+    "dev": "nodemon --exec ts-node src/index.ts",
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "migrate:categories": "ts-node src/scripts/migrateCategories.ts",
+    "migrate:users": "ts-node src/scripts/migrateUsers.ts",
+    "migrate:transactions": "ts-node src/scripts/migrateTransactions.ts",
+    "migrate:all": "npm run migrate:users && npm run migrate:categories && npm run migrate:transactions",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "expense",
+    "tracker",
+    "finance",
+    "ai"
+  ],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@langchain/community": "^1.1.5",
+    "@langchain/core": "^1.1.16",
+    "@langchain/google-genai": "^2.1.11",
+    "@langchain/openai": "^1.2.3",
+    "axios": "^1.13.4",
+    "bcryptjs": "^3.0.3",
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.3",
+    "express": "^5.2.1",
+    "jsonwebtoken": "^9.0.3",
+    "langchain": "^1.2.11",
+    "mongoose": "^9.1.3",
+    "openai": "^6.17.0",
+    "uuid": "^13.0.0",
+    "zod": "^3.23.8"
+  },
+  "devDependencies": {
+    "@types/bcryptjs": "^2.4.6",
+    "@types/cors": "^2.8.19",
+    "@types/express": "^5.0.6",
+    "@types/jsonwebtoken": "^9.0.10",
+    "@types/node": "^25.0.6",
+    "@types/uuid": "^10.0.0",
+    "nodemon": "^3.1.11",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.9.3"
+  }
+}
