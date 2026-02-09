@@ -10,6 +10,7 @@ export default defineConfig({
       'ec2-13-202-159-158.ap-south-1.compute.amazonaws.com',
       '.amazonaws.com', // Allow all AWS domains
       'localhost',
+      'expense.mathiarasan.com',
     ],
   },
   plugins: [react()],
