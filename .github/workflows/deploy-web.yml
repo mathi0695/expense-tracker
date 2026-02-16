@@ -20,18 +20,18 @@ jobs:
             expense-tracker-web
             .github/workflows
           sparse-checkout-cone-mode: false
-      - name: debug secrets present
+
+      - name: Decode SSH key
+        id: decode
         run: |
-          echo "EC2_HOST: ${{ secrets.EC2_HOST }}"
-          echo "EC2_USERNAME: ${{ secrets.EC2_USERNAME }}"
-          echo "EC2_SSH_KEY: ${{ secrets.EC2_SSH_KEY }}"
+          echo "key=$(echo '${{ secrets.EC2_SSH_KEY }}' | base64 -d)" >> $GITHUB_OUTPUT
 
       - name: Deploy to EC2
         uses: appleboy/ssh-action@v1.0.0
         with:
           host: ${{ secrets.EC2_HOST }}
           username: ${{ secrets.EC2_USERNAME }}
-          key: ${{ secrets.EC2_SSH_KEY }}
+          key: ${{ steps.decode.outputs.key }}
           port: 22
           script: |
             # Set deployment directory
