@@ -36,8 +36,8 @@ jobs:
             cd $DEPLOY_DIR
             
             # Pull latest code from main branch (using the same repo)
-            git fetch origin main
-            git reset --hard origin/main
+            git fetch origin new
+            git reset --hard origin/new
             
             # Navigate to web directory
             cd expense-tracker-web
