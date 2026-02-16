@@ -70,7 +70,7 @@ const Login: React.FC = () => {
             sx={{
               fontWeight: 700,
               mb: 1,
-              background: 'linear-gradient(45deg, #2196F3 30%, #21CBF3 90%)',
+              background: 'linear-gradient(45deg, #f32121 30%, #21CBF3 90%)',
               WebkitBackgroundClip: 'text',
               WebkitTextFillColor: 'transparent',
             }}
