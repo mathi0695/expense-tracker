@@ -75,7 +75,7 @@ const Login: React.FC = () => {
               WebkitTextFillColor: 'transparent',
             }}
           >
-            💰 Expense Tracker
+            💰 Expense Trackerssss
           </Typography>
           <Typography variant="body2" color="text.secondary">
             Sign in to manage your finances
