@@ -3,7 +3,7 @@ name: Deploy expense-tracker-web to EC2
 on:
   push:
     branches:
-      - main
+      - new
     paths:
       - 'expense-tracker-web/**'
       - '.github/workflows/deploy-web.yml'
