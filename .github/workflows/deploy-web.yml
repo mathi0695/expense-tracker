@@ -49,10 +49,10 @@ jobs:
             # Build the Docker image
             docker build -t expense-tracker-web:latest .
             
-            # Run the container with port 5174 exposed
+            # Run the container with port 5173 exposed
             docker run -d \
               --name expense-tracker-web \
-              -p 5174:5174 \
+              -p 5173:5173 \
               --restart unless-stopped \
               expense-tracker-web:latest
             
