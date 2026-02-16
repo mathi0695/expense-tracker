@@ -7,8 +7,8 @@ WORKDIR /app
 # Copy package files
 COPY package*.json ./
 
-# Install only production dependencies
-RUN npm install --legacy-peer-deps --omit=dev
+# Install all dependencies (needed for runtime compatibility with compiled code)
+RUN npm install --legacy-peer-deps
 
 # Copy the compiled dist folder (build locally before running docker)
 # Run: npm run build

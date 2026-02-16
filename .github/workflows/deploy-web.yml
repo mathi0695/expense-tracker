@@ -1,0 +1,60 @@
+name: Deploy expense-tracker-web to EC2
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'expense-tracker-web/**'
+      - '.github/workflows/deploy-web.yml'
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          sparse-checkout: |
+            expense-tracker-web
+            .github/workflows
+          sparse-checkout-cone-mode: false
+
+      - name: Deploy to EC2
+        uses: appleboy/ssh-action@v1.0.0
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ${{ secrets.EC2_USERNAME }}
+          key: ${{ secrets.EC2_SSH_KEY }}
+          port: 22
+          script: |
+            # Set deployment directory
+            DEPLOY_DIR=/home/ubuntu/expense-tracker
+            
+            # Navigate to deployment directory
+            cd $DEPLOY_DIR
+            
+            # Pull latest code from main branch (using the same repo)
+            git fetch origin main
+            git reset --hard origin/main
+            
+            # Navigate to web directory
+            cd expense-tracker-web
+            
+            # Stop existing container if running
+            docker stop expense-tracker-web 2>/dev/null || true
+            docker rm expense-tracker-web 2>/dev/null || true
+            
+            # Build the Docker image
+            docker build -t expense-tracker-web:latest .
+            
+            # Run the container with port 5174 exposed
+            docker run -d \
+              --name expense-tracker-web \
+              -p 5174:5174 \
+              --restart unless-stopped \
+              expense-tracker-web:latest
+            
+            echo "Deployment completed successfully!"
+            docker ps | grep expense-tracker-web
